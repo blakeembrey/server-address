@@ -22,7 +22,7 @@ var app = express();
 
 var server = serverAddress(app);
 
-// Listen to random available port.
+// Listen to randomly available port.
 server.listen();
 
 server.url('/foo'); //=> "http://127.0.0.1:58933/foo"
