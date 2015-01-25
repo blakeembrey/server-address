@@ -1,0 +1,25 @@
+{
+  "name": "server-address",
+  "version": "0.0.0",
+  "homepage": "https://github.com/blakeembrey/server-address",
+  "authors": [
+    "Blake Embrey <hello@blakeembrey.com>"
+  ],
+  "description": "Listen to a randomly available port and resolve urls relative to the server address",
+  "main": "server-address.js",
+  "keywords": [
+    "server",
+    "address",
+    "listen",
+    "http",
+    "https"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

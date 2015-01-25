@@ -1,0 +1,42 @@
+{
+  "name": "server-address",
+  "version": "0.0.0",
+  "description": "Listen to a randomly available port and resolve urls relative to the server address",
+  "main": "server-address.js",
+  "files": [
+    "server-address.js",
+    "LICENSE"
+  ],
+  "scripts": {
+    "jshint": "jshint .",
+    "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --bail",
+    "test": "npm run jshint && npm run mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/blakeembrey/server-address.git"
+  },
+  "keywords": [
+    "server",
+    "address",
+    "listen",
+    "http",
+    "https"
+  ],
+  "author": "Blake Embrey <hello@blakeembrey.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blakeembrey/server-address/issues"
+  },
+  "homepage": "https://github.com/blakeembrey/server-address",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "istanbul": "^0.3.5",
+    "jshint": "^2.6.0",
+    "mocha": "^2.1.0",
+    "pre-commit": "0.0.11",
+    "request": "^2.51.0",
+    "which": "^1.0.8"
+  },
+  "dependencies": {}
+}
