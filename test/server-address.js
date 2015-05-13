@@ -40,6 +40,32 @@ describe('server address', function () {
     })
   })
 
+  it('should close immediately', function (done) {
+    var server = serverAddress(handler)
+
+    server.listen()
+
+    var url1 = server.url('/foo')
+    var url2 = server.url('/bar')
+
+    request(url1, function (err, res, body) {
+      expect(body).to.equal('GET /foo')
+
+      server.close()
+
+      /* istanbul ignore next */
+      if (err) {
+        return done(err)
+      }
+
+      return request(url2, function (err, res, body) {
+        expect(err.code).to.equal('ECONNREFUSED')
+
+        return done()
+      })
+    })
+  })
+
   it('should support http servers', function (done) {
     var server = serverAddress(http.createServer(handler))
 

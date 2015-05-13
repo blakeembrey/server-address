@@ -1,6 +1,7 @@
 var http = require('http')
 var https = require('https')
 var resolve = require('url').resolve
+var enableDestroy = require('server-destroy')
 
 /**
  * Export server address.
@@ -28,6 +29,8 @@ function serverAddress (app) {
   function listen () {
     if (!app.address()) {
       server = app.listen(0)
+
+      enableDestroy(server)
     }
   }
 
@@ -54,7 +57,7 @@ function serverAddress (app) {
    */
   function close () {
     if (server) {
-      server.close()
+      server.destroy()
     }
   }
 
