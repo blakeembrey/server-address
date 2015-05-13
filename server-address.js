@@ -1,11 +1,11 @@
-var http = require('http');
-var https = require('https');
-var resolve = require('url').resolve;
+var http = require('http')
+var https = require('https')
+var resolve = require('url').resolve
 
 /**
  * Export server address.
  */
-module.exports = serverAddress;
+module.exports = serverAddress
 
 /**
  * Create a function that listens and closes server ports.
@@ -16,18 +16,18 @@ module.exports = serverAddress;
 function serverAddress (app) {
   // Support functions (Express, Connect, etc).
   if (typeof app === 'function') {
-    app = http.createServer(app);
+    app = http.createServer(app)
   }
 
-  var server;
-  var protocol = app instanceof https.Server ? 'https' : 'http';
+  var server
+  var protocol = app instanceof https.Server ? 'https' : 'http'
 
   /**
    * Listen to a random port number.
    */
   function listen () {
     if (!app.address()) {
-      server = app.listen(0);
+      server = app.listen(0)
     }
   }
 
@@ -38,15 +38,15 @@ function serverAddress (app) {
    * @return {String}
    */
   function url (path) {
-    var addr = app.address();
+    var addr = app.address()
 
     if (!addr) {
-      throw new Error('server is not listening, call the listen method first');
+      throw new Error('server is not listening, call the listen method first')
     }
 
-    var origin = protocol + '://127.0.0.1:' + addr.port;
+    var origin = protocol + '://127.0.0.1:' + addr.port
 
-    return resolve(origin, path || '/');
+    return resolve(origin, path || '/')
   }
 
   /**
@@ -54,7 +54,7 @@ function serverAddress (app) {
    */
   function close () {
     if (server) {
-      server.close();
+      server.close()
     }
   }
 
@@ -62,5 +62,5 @@ function serverAddress (app) {
     listen: listen,
     url: url,
     close: close
-  };
+  }
 }

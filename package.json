@@ -8,9 +8,10 @@
     "LICENSE"
   ],
   "scripts": {
-    "jshint": "jshint .",
-    "mocha": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --bail",
-    "test": "npm run jshint && npm run mocha"
+    "lint": "standard",
+    "test-spec": "mocha -R spec --bail",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --bail",
+    "test": "npm run lint && npm run test-cov"
   },
   "repository": {
     "type": "git",
@@ -30,13 +31,16 @@
   },
   "homepage": "https://github.com/blakeembrey/server-address",
   "devDependencies": {
-    "chai": "^1.10.0",
+    "chai": "^2.3.0",
     "istanbul": "^0.3.5",
     "jshint": "^2.6.0",
     "mocha": "^2.1.0",
-    "pre-commit": "0.0.11",
+    "pre-commit": "^1.0.7",
     "request": "^2.51.0",
+    "standard": "^3.8.0",
     "which": "^1.0.8"
   },
-  "dependencies": {}
+  "dependencies": {
+    "server-destroy": "^1.0.0"
+  }
 }

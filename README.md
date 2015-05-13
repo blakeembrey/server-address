@@ -9,26 +9,26 @@ Listen to a randomly available port and resolve urls relative to the server addr
 
 ## Installation
 
-```sh
+```
 npm install server-address --save
 ```
 
 ## Usage
 
 ```js
-var serverAddress = require('server-address');
-var express = require('express');
-var app = express();
+var serverAddress = require('server-address')
+var express = require('express')
+var app = express()
 
-var server = serverAddress(app);
+var server = serverAddress(app)
 
 // Listen to randomly available port.
-server.listen();
+server.listen()
 
-server.url('/foo'); //=> "http://127.0.0.1:58933/foo"
+server.url('/foo') //=> "http://127.0.0.1:58933/foo"
 
 // Close the server connection.
-server.close();
+server.close()
 ```
 
 ## License
