@@ -118,6 +118,34 @@ describe('server address', function () {
       return done(err)
     })
   })
+
+  it('should support callback functions', function (done) {
+    var server = serverAddress(http.createServer(handler))
+
+    server.listen(function () {
+      request(server.url('/foo'), function (err, res, body) {
+        expect(body).to.equal('GET /foo')
+
+        server.close(function () {
+          return done(err)
+        })
+      })
+    })
+  })
+
+  it('should support callback functions when already listening', function (done) {
+    var server = serverAddress(http.createServer(handler).listen(0))
+
+    server.listen(function () {
+      request(server.url('/foo'), function (err, res, body) {
+        expect(body).to.equal('GET /foo')
+
+        server.close(function () {
+          return done(err)
+        })
+      })
+    })
+  })
 })
 
 /**

@@ -26,12 +26,16 @@ function serverAddress (app) {
   /**
    * Listen to a random port number.
    */
-  function listen () {
+  function listen (cb) {
     if (!app.address()) {
-      server = app.listen(0)
+      server = app.listen(0, cb)
 
       enableDestroy(server)
+
+      return
     }
+
+    return cb && process.nextTick(cb)
   }
 
   /**
@@ -55,10 +59,14 @@ function serverAddress (app) {
   /**
    * Close the server (if listening).
    */
-  function close () {
+  function close (cb) {
     if (server) {
-      server.destroy()
+      server.destroy(cb)
+
+      return
     }
+
+    return cb && process.nextTick(cb)
   }
 
   return {

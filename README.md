@@ -31,6 +31,8 @@ server.url('/foo') //=> "http://127.0.0.1:58933/foo"
 server.close()
 ```
 
+**Note:** `listen` and `close` can optionally accept callback functions.
+
 ## License
 
 MIT license
