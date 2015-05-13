@@ -1,6 +1,6 @@
 {
   "name": "server-address",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Listen to a randomly available port and resolve urls relative to the server address",
   "main": "server-address.js",
   "files": [
