@@ -22,6 +22,7 @@ function serverAddress (app) {
 
   var server
   var protocol = app instanceof https.Server ? 'https' : 'http'
+  var self = {}
 
   /**
    * Listen to a random port number.
@@ -32,10 +33,14 @@ function serverAddress (app) {
 
       enableDestroy(server)
 
-      return
+      return self
     }
 
-    return cb && process.nextTick(cb)
+    if (cb) {
+      process.nextTick(cb)
+    }
+
+    return self
   }
 
   /**
@@ -63,15 +68,20 @@ function serverAddress (app) {
     if (server) {
       server.destroy(cb)
 
-      return
+      return self
     }
 
-    return cb && process.nextTick(cb)
+    if (cb) {
+      process.nextTick(cb)
+    }
+
+    return self
   }
 
-  return {
-    listen: listen,
-    url: url,
-    close: close
-  }
+  // Expose methods externally.
+  self.listen = listen
+  self.url = url
+  self.close = close
+
+  return self
 }
