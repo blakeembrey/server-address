@@ -33,6 +33,10 @@ server.close()
 
 **Note:** `listen` and `close` can optionally accept callback functions.
 
+## TypeScript
+
+Includes a [TypeScript type definition](server-address.d.ts).
+
 ## License
 
 MIT license

@@ -32,11 +32,7 @@ function serverAddress (app) {
       server = app.listen(0, cb)
 
       enableDestroy(server)
-
-      return self
-    }
-
-    if (cb) {
+    } else if (cb) {
       process.nextTick(cb)
     }
 
@@ -67,11 +63,7 @@ function serverAddress (app) {
   function close (cb) {
     if (server) {
       server.destroy(cb)
-
-      return self
-    }
-
-    if (cb) {
+    } else if (cb) {
       process.nextTick(cb)
     }
 

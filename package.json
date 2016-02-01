@@ -5,6 +5,8 @@
   "main": "server-address.js",
   "files": [
     "server-address.js",
+    "server-address.d.ts",
+    "typings.json",
     "LICENSE"
   ],
   "scripts": {
