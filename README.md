@@ -1,5 +1,7 @@
 # Server Address
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/server-address.svg)](https://greenkeeper.io/)
+
 [![NPM version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build status][travis-image]][travis-url]
