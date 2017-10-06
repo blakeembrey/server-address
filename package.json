@@ -38,7 +38,6 @@
     "istanbul": "^0.4.5",
     "jshint": "^2.6.0",
     "mocha": "^4.0.1",
-    "pre-commit": "^1.0.7",
     "request": "^2.51.0",
     "standard": "^10.0.2",
     "which": "^1.0.8"
