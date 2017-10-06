@@ -106,14 +106,17 @@ describe('server address', function () {
     var server = serverAddress(app)
 
     expect(app.address().port).to.equal(originalPort)
+
     server.listen()
+
     expect(app.address().port).to.equal(originalPort)
 
     request(server.url('/foo'), function (err, res, body) {
       expect(body).to.equal('GET /foo')
 
       server.close()
-      expect(app.address().port).to.equal(originalPort)
+
+      expect(app.address()).to.equal(null)
 
       return done(err)
     })

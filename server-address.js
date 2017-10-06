@@ -1,7 +1,6 @@
 var http = require('http')
 var https = require('https')
 var resolve = require('url').resolve
-var enableDestroy = require('server-destroy')
 
 /**
  * Export server address.
@@ -15,25 +14,32 @@ module.exports = serverAddress
  * @return {Object}
  */
 function serverAddress (app) {
-  // Support functions (Express, Connect, etc).
-  if (typeof app === 'function') {
-    app = http.createServer(app)
-  }
-
-  var server
+  var server = typeof app === 'function' ? http.createServer(app) : app
   var protocol = app instanceof https.Server ? 'https' : 'http'
+  var isListening = false
   var self = {}
+  var connections = {}
 
   /**
    * Listen to a random port number.
    */
   function listen (cb) {
-    if (!app.address()) {
-      server = app.listen(0, cb)
-
-      enableDestroy(server)
+    if (!server.address()) {
+      server.listen(0, cb)
     } else if (cb) {
       process.nextTick(cb)
+    }
+
+    if (!isListening) {
+      isListening = true
+
+      server.on('connection', function (c) {
+        var key = c.remoteAddress + ':' + c.remotePort
+        connections[key] = c
+        c.on('close', function () {
+          delete connections[key]
+        })
+      })
     }
 
     return self
@@ -46,7 +52,7 @@ function serverAddress (app) {
    * @return {String}
    */
   function url (path) {
-    var addr = app.address()
+    var addr = server.address()
 
     if (!addr) {
       throw new Error('server is not listening, call the listen method first')
@@ -61,10 +67,10 @@ function serverAddress (app) {
    * Close the server (if listening).
    */
   function close (cb) {
-    if (server) {
-      server.destroy(cb)
-    } else if (cb) {
-      process.nextTick(cb)
+    server.close(cb)
+
+    for (var key in connections) {
+      connections[key].destroy()
     }
 
     return self

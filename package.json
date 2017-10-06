@@ -41,8 +41,5 @@
     "request": "^2.51.0",
     "standard": "^10.0.2",
     "which": "^1.0.8"
-  },
-  "dependencies": {
-    "server-destroy": "^1.0.0"
   }
 }
