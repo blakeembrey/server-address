@@ -6,7 +6,7 @@ export class ServerAddress {
   server: http.Server | https.Server;
   protocol: string;
   isListening = false;
-  connections = new Map<string, any>();
+  connections = new Set<any>();
 
   constructor(app: http.RequestListener | http.Server | https.Server) {
     this.server = typeof app === "function" ? http.createServer(app) : app;
@@ -27,10 +27,10 @@ export class ServerAddress {
       this.isListening = true;
 
       this.server.on("connection", c => {
-        const key = `${c.remoteAddress}:${c.remotePort}`;
-        this.connections.set(key, c);
+        this.connections.add(c);
+
         c.on("close", () => {
-          this.connections.delete(key);
+          this.connections.delete(c);
         });
       });
     }
