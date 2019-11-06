@@ -1,5 +1,4 @@
-node_modules/
-bower_components/
-coverage/
 .DS_Store
-typings/
+node_modules/
+dist/
+coverage/

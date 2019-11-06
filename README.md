@@ -4,9 +4,8 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
-[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/server-address.svg)](https://greenkeeper.io/)
 
-Listen to a randomly available port and resolve urls relative to the server address.
+> Listen to a randomly available port and resolve URLs relative to the server address.
 
 ## Installation
 
@@ -17,26 +16,22 @@ npm install server-address --save
 ## Usage
 
 ```js
-var serverAddress = require('server-address')
-var express = require('express')
-var app = express()
+import { ServerAddress } from "server-address";
+import * as express from "express";
 
-var server = serverAddress(app)
+const app = express();
+const server = new ServerAddress(app);
 
 // Listen to randomly available port.
-server.listen()
+server.listen();
 
-server.url('/foo') //=> "http://127.0.0.1:58933/foo"
+server.url("/foo"); //=> "http://127.0.0.1:58933/foo"
 
 // Close the server connection.
-server.close()
+server.close();
 ```
 
 **Note:** `listen` and `close` can optionally accept callback functions.
-
-## TypeScript
-
-Includes a [TypeScript type definition](server-address.d.ts).
 
 ## License
 

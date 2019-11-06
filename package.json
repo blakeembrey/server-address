@@ -1,20 +1,20 @@
 {
   "name": "server-address",
   "version": "2.0.0",
-  "description": "Listen to a randomly available port and resolve urls relative to the server address",
-  "main": "server-address.js",
-  "typings": "server-address.d.ts",
+  "description": "Listen to a randomly available port and resolve URLs relative to the server address",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "server-address.js",
-    "server-address.d.ts",
-    "typings.json",
-    "LICENSE"
+    "dist/"
   ],
   "scripts": {
-    "lint": "standard",
-    "test-spec": "mocha -R spec --bail",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --bail",
-    "test": "npm run lint && npm run test-cov"
+    "prettier": "prettier --write",
+    "lint": "tslint \"src/**/*.{js,jsx,ts,tsx}\" --project tsconfig.json",
+    "format": "npm run prettier -- \"{.,src/**}/*.{js,jsx,ts,tsx,md,yml,yaml}\"",
+    "build": "rimraf dist && tsc",
+    "specs": "jest --coverage --detectOpenHandles",
+    "test": "npm run -s lint && npm run -s build && npm run -s specs",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,13 +33,52 @@
     "url": "https://github.com/blakeembrey/server-address/issues"
   },
   "homepage": "https://github.com/blakeembrey/server-address",
+  "jest": {
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "transform": {
+      "\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md,yml,yaml}": [
+      "npm run prettier",
+      "git add"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
-    "chai": "^4.0.0",
-    "istanbul": "^0.4.5",
-    "jshint": "^2.6.0",
-    "mocha": "^4.0.1",
-    "request": "^2.51.0",
-    "standard": "^10.0.2",
-    "which": "^1.0.8"
+    "@types/jest": "^24.0.22",
+    "@types/node": "^12.12.6",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "popsicle": "^12.0.5",
+    "popsicle-transport-http": "^1.0.6",
+    "prettier": "^1.18.2",
+    "servie": "^4.3.2",
+    "throwback": "^4.1.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.7.2"
   }
 }
