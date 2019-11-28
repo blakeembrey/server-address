@@ -1,8 +1,7 @@
 import * as http from "http";
 import * as https from "https";
 import { compose } from "throwback";
-import { Request } from "servie/dist/node";
-import { fetch, toFetch } from "popsicle";
+import { fetch, toFetch, Request } from "popsicle/dist/node";
 import { transport } from "popsicle-transport-http";
 import { join } from "path";
 import { readFileSync } from "fs";

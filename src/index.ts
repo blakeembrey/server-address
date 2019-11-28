@@ -45,8 +45,6 @@ export class ServerAddress {
     for (const connection of this.connections.values()) {
       connection.destroy();
     }
-
-    return self;
   }
 
   /**
